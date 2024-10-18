@@ -1,6 +1,10 @@
 import './assets/main.css';
-import { createApp } from 'vue';
 import App from './App.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import Login from "./components/Login.vue";
+import Home from './components/Home.vue';
+import Profile from './components/Profile.vue';
+
 
 const routes = createRouter[
     {path: "/", component: login},
