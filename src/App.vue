@@ -1,3 +1,15 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const searchQuery = ref(null);
+function onSearch() {
+// router.push({name: 'products', params: {searchQuery: searchQuery.value}}) hace lo mismo que la linea 8
+router.push(`/products/${searchQuery.value}`)
+}
+</script>
+
 <template>
   <h1>Hello App!</h1>
   <p>
@@ -7,6 +19,7 @@
     <RouterLink class="nav-link" to="/">Go to Login</RouterLink>
     <RouterLink class="nav-link" to="/home">Go to Home</RouterLink>
     <RouterLink class="nav-link" to="/profile/123">Go to Profile</RouterLink>
+    <input type="text" name="query" @keyup.enter="onSearch" v-model="searchQuery"/>
   </nav>
   <main class="main-content">
     <RouterView />
