@@ -16,6 +16,15 @@ export const useShoppingCartStore = defineStore( 'carrito', () => {
 
 
 
+<<<<<<< HEAD
+=======
+<template>
+
+</template>
+
+
+
+>>>>>>> 5b001d26731fb60114d565ef4ff3c0160468d32a
 <style scoped>
 
 
