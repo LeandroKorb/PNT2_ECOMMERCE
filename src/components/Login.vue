@@ -14,7 +14,7 @@ const login = () => {
 <template>
  <div class="container">
   <div class="login-box">
-    <div class="logo"> nombre del eccomerce</div>
+    <div class="logo"> TiendaGo</div>
       <form @click.prevent="login">
         <input type="text" placeholder="username" required v-model="username"/>
         <input type="password" placeholder="password" required v-model="password"/>

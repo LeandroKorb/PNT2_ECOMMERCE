@@ -5,14 +5,21 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from "./components/Login.vue";
 import Home from './components/Home.vue';
 import Profile from './components/Profile.vue';
-
+import ProductList from './components/ProductList.vue'; 
+import Cart from './components/Cart.vue'; 
+import ProductDetail from './components/ProductDetail.vue'; 
 
 
 const router = createRouter({
     routes: [
         {path: "/", component: Login},
         {path: "/home", component: Home},
-        {path: "/profile/:id", component: Profile}
+        {path: "/profile/:id", component: Profile},
+        {path: "/products", component: ProductList },
+        {path: "/cart", component: Cart },
+        { path: "/products/:id", component: ProductDetail }, 
+
+
     ],
     history: createWebHistory(),
 })
