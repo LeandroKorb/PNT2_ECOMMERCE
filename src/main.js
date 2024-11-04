@@ -3,7 +3,6 @@ import App from "./App.vue";
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "./components/Login.vue";
-<<<<<<< HEAD
 import Home from './components/Home.vue';
 import Profile from './components/Profile.vue';
 import ProductList from './components/ProductList.vue'; 
@@ -24,7 +23,8 @@ const router = createRouter({
     ],
     history: createWebHistory(),
 })
-=======
+
+/*
 import Home from "./components/Home.vue";
 import Profile from "./components/Profile.vue";
 import Productos from "./components/Productos.vue";
@@ -44,6 +44,5 @@ const router = createRouter({
   ],
   history: createWebHistory(),
 });
->>>>>>> 5b001d26731fb60114d565ef4ff3c0160468d32a
-
+*/
 createApp(App).use(router).mount("#app");
