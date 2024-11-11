@@ -5,7 +5,7 @@
       <router-link class="nav-link" to="/">Iniciar sesión</router-link>
       <router-link class="nav-link" to="/home">Home</router-link>
       <router-link class="nav-link" to="/profile">Perfil</router-link>
-      <router-link class="nav-link" to="/products">Videojuegos</router-link>
+      <router-link class="nav-link" to="/products">Comprar videojuegos!</router-link>
       <router-link class="nav-link" to="/cart">Carrito</router-link>
       <!-- Búsqueda -->
       <input
@@ -16,6 +16,21 @@
         class="search-input"
       />
     </nav>
+
+    <!-- Condición para mostrar el carrusel solo en la página Home -->
+    <div v-if="isHomePage">
+      <div class="carousel">
+        <h2>Productos Destacados</h2>
+        <div class="carousel-items">
+          <div v-for="(product, index) in featuredProducts" :key="product.id" class="carousel-item">
+            <img :src="product.image" :alt="product.name" class="carousel-image" />
+            <p>{{ product.name }}</p>
+            <p>$ {{ product.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <main class="main-content">
       <router-view @add-to-cart="addToCart" :products="filteredProducts" :cart-items="cartItems" @update-cart="updateCart" />
     </main>
@@ -34,8 +49,6 @@ import cod from './images/cod.jpg';
 import fortnite from './images/fortnite.jpg';
 import animal from './images/animal.jpg';
 
-
-
 export default {
   name: 'App',
   data() {
@@ -50,6 +63,14 @@ export default {
       return this.products.filter(product =>
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+    },
+    // Obtener solo los primeros 5 productos para el carrusel
+    featuredProducts() {
+      return this.products.slice(0, 5);
+    },
+    // Verificar si la ruta actual es 'Home'
+    isHomePage() {
+      return this.$route.path === '/home';
     }
   },
   created() {
@@ -65,7 +86,7 @@ export default {
         { id: 5, name: 'Minecraft', price: 19.99, description: 'Construye lo que imagines en este juego de bloques', image: minecraft },
         { id: 6, name: 'Halo Infinite', price: 59.99, description: 'Lucha contra alienígenas en el espacio', image: halo },
         { id: 7, name: 'FIFA 24', price: 49.99, description: 'El mejor simulador de fútbol', image: fifa },
-        { id: 8, name: 'Call of Duty: Warzone', price: 0, description: 'Juego de disparos en Battle Royale', image: cod},
+        { id: 8, name: 'Call of Duty: Warzone', price: 0, description: 'Juego de disparos en Battle Royale', image: cod },
         { id: 9, name: 'Fortnite', price: 0, description: 'Únete a la batalla en este shooter gratuito', image: fortnite },
         { id: 10, name: 'Animal Crossing', price: 59.99, description: 'Crea tu isla en este adorable simulador', image: animal }
       ];
@@ -94,49 +115,42 @@ export default {
 </script>
 
 <style scoped>
-.app-container {
+/* Estilos del carrusel */
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-items {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  min-width: 20%;
+  margin-right: 10px;
   text-align: center;
 }
 
+.carousel-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.carousel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: #333;
-  padding: 1rem;
+  margin-bottom: 20px;
 }
 
 .nav-link {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 1rem;
-}
-
-.nav-link:hover {
-  color: #1db954;
-}
-
-.search-input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin-left: 1rem;
-}
-
-.main-content {
-  padding: 20px;
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-  }
-
-  .nav-link {
-    margin: 0.5rem 0;
-  }
-
-  .search-input {
-    margin: 1rem 0;
-  }
+  margin-right: 15px;
 }
 </style>
