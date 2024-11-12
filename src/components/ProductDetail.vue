@@ -9,29 +9,33 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ProductDetail',
-  props: {
-    product: Object
-  },
-  methods: {
-    // Método para añadir al carrito
-    addToCart() {
-      this.$emit('add-to-cart', this.product);
-    },
-    shareProduct() {
-      const shareData = {
-        title: this.product.name,
-        text: this.product.description,
-        url: window.location.href,
-      };
+<script setup>
+import { defineProps, defineEmits } from 'vue';
 
-      navigator.share(shareData)
-        .then(() => console.log('Compartido exitosamente'))
-        .catch((error) => console.error('Error al compartir:', error));
-    }
-  }
+// Definir las propiedades del componente
+const props = defineProps({
+  product: Object,
+});
+
+// Emitir eventos hacia el componente padre
+const emit = defineEmits(['add-to-cart']);
+
+// Método para añadir al carrito
+const addToCart = () => {
+  emit('add-to-cart', props.product);
+};
+
+// Método para compartir el producto
+const shareProduct = () => {
+  const shareData = {
+    title: props.product.name,
+    text: props.product.description,
+    url: window.location.href,
+  };
+
+  navigator.share(shareData)
+    .then(() => console.log('Compartido exitosamente'))
+    .catch((error) => console.error('Error al compartir:', error));
 };
 </script>
 
